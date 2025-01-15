@@ -1,10 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define int long long
-const int M = 1e9 + 7;
-const int N = 2e5 + 10;
-
 template<typename T>
 struct Node{
     T data;
@@ -13,9 +9,9 @@ struct Node{
 };
 
 template<typename T>
-struct Linklist{
+struct LinkedList{
     Node<T>* head;
-    Linklist() : head(nullptr){}
+    LinkedList() : head(nullptr){}
 
     void addFront(T data){
         Node<T>* new_node = new Node<T>(data);
@@ -33,11 +29,10 @@ struct Linklist{
         delete temp;
     }
 
-
-
     void addBack(T data){
         Node<T>* new_node = new Node<T>(data);
         Node<T>* temp = head;
+        if(!head){head = new_node; return;}
         while(temp->next != nullptr)temp = temp->next;
         temp->next = new_node;
     }
@@ -114,20 +109,40 @@ struct Linklist{
 
 
 int32_t main(){
-    Linklist<int> list;
-    list.addFront(5);
-    list.addFront(10);
+    //List of string type
+    LinkedList<string> list1;
 
-    list.display();
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        string x; cin >> x;
+        list1.addBack(x);
+    }
+    list1.display();
 
-    list.deleteFront();
-    list.display();
+    //List of int type
+    LinkedList<int> list2;
+    for(int i = 0; i < n; i++){
+        int x; cin >> x;
+        list2.addBack(x);
+    }
+    list2.display();
 
-    list.addBack(6);
-    list.addBack(7);
-    list.deleteBack();
-    list.addBack(8);
-    list.addAt(2, 4);
-    list.display();
 
+    //List of vector<int> type
+    LinkedList<vector<int>> list3;
+    for(int i = 0; i < 3; i++){
+        vector<int> temp;
+        for(int j = 0; j < 3; j++){
+            int x; cin >> x;
+            temp.push_back(x);
+        }
+        list3.addBack(temp);
+    }
+
+    auto temp = list3.head;
+    while(temp != nullptr){
+        for(auto i : temp->data)cout << i <<" "; cout << endl;
+        temp = temp->next;
+    }
 }
