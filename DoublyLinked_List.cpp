@@ -61,6 +61,55 @@ struct LinkedList{
         delete temp;
     }
 
+
+    void addAt(int pos, int data){
+        if(pos == 0){
+            addFront(data);
+            return;
+        }
+        nodeptr temp = head;
+        nodeptr new_node = new Node(data);
+        for(int i = 1; i < pos and temp; i++){
+            temp = temp->next;
+        }
+
+        if(!temp){
+            cout << "Out of bound" << endl;
+            return;
+        }
+        if(temp == tail){
+            addBack(data);
+            return;
+        }
+        new_node->prev = temp;
+        new_node->next = temp->next;
+        temp->next = new_node;
+        new_node->next->prev = new_node;
+    }
+
+    void deleteAt(int pos){
+        if(pos == 0){
+            deleteFront();
+            return;
+        }
+        nodeptr temp = head;
+        for(int i = 0; i < pos and temp; i++){
+            temp = temp->next;
+        }
+        if(!temp){
+            cout << "Out of bound" << endl;
+            return;
+        }
+        if(temp == tail){
+            deleteBack();
+            return;
+        }
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+
+        delete temp;
+    }
+
     void display(){
         if(!head){
             cout << "List is empty!" << endl;
@@ -87,7 +136,12 @@ int32_t main(){
     list.addBack(5);
     list.addBack(6);
     list.addBack(7);
+    list.display();
+
     list.deleteFront();
     list.deleteBack();
+    list.addAt(4, 40);
+    list.display();
+    list.deleteAt(5);
     list.display();  
 }
