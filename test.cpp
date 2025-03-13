@@ -5,12 +5,16 @@ using namespace std;
 const int M = 1e9 + 7;
 const int N = 2e5 + 10;
 
+
 template<typename T>
 struct Node{
     T data;
     Node* next;
     Node* prev;
-    Node(T data) : data(data), next(nullptr), prev(nullptr){};
+    Node(T data){
+        this->data = data;
+        next = prev = nullptr;
+    }
 };
 
 template<typename T>
@@ -20,10 +24,13 @@ struct LinkedList{
     nodeptr head;
     nodeptr tail;
 
-    LinkedList() : head(nullptr), tail(nullptr){}
+    LinkedList(){
+        head = nullptr;
+        tail = nullptr;
+    }
 
     void addFront(T data){len++;
-        nodeptr new_node = new Node(data);
+        nodeptr new_node = new Node<T>(data);
         if(!head){
             head = tail = new_node;
             return;
@@ -34,7 +41,7 @@ struct LinkedList{
     }
 
     void addBack(T data){len++;
-        nodeptr new_node = new Node(data);
+        nodeptr new_node = new Node<T>(data);
         if(!tail){
             head = tail = new_node;
             return;
@@ -75,7 +82,7 @@ struct LinkedList{
             return;
         }
         nodeptr temp = head;
-        nodeptr new_node = new Node(data);
+        nodeptr new_node = new Node<T>(data);
         for(int i = 1; i < pos and temp; i++){
             temp = temp->next;
         }
@@ -119,6 +126,33 @@ struct LinkedList{
         delete temp;
     }
 
+    void sortedAdd(T data){
+
+        nodeptr save = nullptr;
+        nodeptr temp = head;
+        nodeptr newNode = new Node<T>(data);
+        if(!head){
+            head = tail = newNode;
+            return;
+        }
+        if(data <= head->data){
+            addFront(data);
+            return;
+        }
+        if(data >= tail->data){
+            addBack(data);
+            return;
+        }
+
+        while(temp->data < data){
+            save = temp;
+            temp = temp->next;
+        }
+        newNode->next = save->next;
+        newNode->prev = save;
+        save->next = newNode;        
+    }
+
     void display(){
         if(!head){
             cerr << "List is empty!" << endl;
@@ -139,69 +173,20 @@ struct LinkedList{
     }
 };
 
-
-template<typename T>
-void bubbleSort(LinkedList<T> list){
-    for(Node<T>* x = list.head; x; x = x->next){
-        for(Node<T>* y = x->next; y; y = y->next){
-            if(x->data > y->data){
-                swap(x->data, y->data);
-            }
-        }
-    }
-}
-
-
-template<typename T>
-LinkedList<T> mergeSort(LinkedList<T> list){
-    int n = list.len;
-    int mid = n / 2;
-    LinkedList<T> left, right;
-    Node<T>* temp = list.head;
-    for(int i = 0; i < mid; i++){
-        left.addBack(temp->data);
-        temp = temp->next;
-    }
-    for(int i = mid; i < n; i++){
-        right.addBack(temp->data);
-        temp = temp->next;
-    }
-
-    if(left.len > 1)left = mergeSort(left);
-    if(right.len > 1)right = mergeSort(right);
-
-    list.clearList();
-    Node<T>* x = left.head, *y = right.head;
-    while(x and y){
-        if(x->data < y->data){
-            list.addBack(x->data);
-            x = x->next;
-        }else{
-            list.addBack(y->data);
-            y = y->next;
-        }
-    }
-    while(x){
-        list.addBack(x->data);
-        x = x->next;
-    }
-    while(y){
-        list.addBack(y->data);
-        y = y->next;
-    }
-    return list;    
-}
-
 int32_t main(){
-    int n;
-    cin >> n;
     LinkedList<int> list;
-    for(int i = 0; i < n; i++){
-        int x; cin >> x;
-        list.addBack(x);
-    }
+    list.sortedAdd(10);
+    list.sortedAdd(41);
+    list.sortedAdd(3);
+    list.sortedAdd(4);
+    list.sortedAdd(41);
+    list.sortedAdd(50);
     list.display();
+    
 
-    list = mergeSort<int>(list);
-    list.display();
+    LinkedList<string> list1;
+    list1.sortedAdd("RU");
+    list1.sortedAdd("CSE");
+
+    list1.display();
 }
