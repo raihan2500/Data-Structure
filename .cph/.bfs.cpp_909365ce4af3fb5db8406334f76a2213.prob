@@ -1,0 +1,1 @@
+{"name":"Local: bfs","url":"/home/raihan/Desktop/Data Structure/Data-Structure/bfs.cpp","tests":[{"id":1746640389875,"input":"4 5\n1 2\n2 3\n1 4\n2 4\n3 4","output":"00"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/raihan/Desktop/Data Structure/Data-Structure/bfs.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: dfs","url":"/home/raihan/Desktop/Data Structure/Data-Structure/dfs.cpp","tests":[{"id":1744478455517,"input":"5 6\n1 2\n1 5\n2 3\n3 4\n4 5\n5 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/raihan/Desktop/Data Structure/Data-Structure/dfs.cpp","group":"local","local":true}

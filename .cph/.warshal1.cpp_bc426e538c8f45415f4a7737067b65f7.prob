@@ -1,0 +1,1 @@
+{"name":"Local: warshal1","url":"/home/raihan/Desktop/Data Structure/Data-Structure/warshal1.cpp","tests":[{"id":1745163795316,"input":"4\n0 1 0 1\n0 0 0 1\n0 1 0 0 \n0 0 1 0","output":"00"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/raihan/Desktop/Data Structure/Data-Structure/warshal1.cpp","group":"local","local":true}

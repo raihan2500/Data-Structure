@@ -5,12 +5,12 @@ using namespace std;
 const int M = 1e9 + 7;
 const int N = 2e5 + 10;
 
-int n = 1;
+int n = 0;
 int heap[N];
 
 void heapify(int k){
     int par = k / 2;
-    if(heap[par] == -1)return;
+    if(par == 0)return;
 
     if(heap[k] > heap[par]){
         swap(heap[k], heap[par]);
@@ -19,8 +19,8 @@ void heapify(int k){
 }
 
 void insert(int item){
-    heap[n++] = item;
-    heapify(n - 1);
+    heap[++n] = item;
+    heapify(n);
 }
 
 int32_t main(){
@@ -32,7 +32,7 @@ int32_t main(){
     for(int i = 0; i < m; i++){
         int x; cin >> x;
         insert(x);
-        clog << heap[1] << endl;
+        clog << "root: " <<  heap[1] << endl;
     }
 
     for(int i = 1; i <= m; i++){
